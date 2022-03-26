@@ -17,7 +17,13 @@ runs:
       run: echo "::set-output name=sha7::$(echo ${GITHUB_SHA} | cut -c1-7)"
       shell: bash
 
-    - name: Install dependencies
+    - name: Install prod dependencies
+      if: inputs.dev == false
+      run: composer install --no-ansi --no-dev --no-interaction --no-progress --optimize-autoloader
+      shell: bash
+
+    - name: Install dev dependencies
+      if: inputs.dev == true
       run: composer install --no-ansi --no-dev --no-interaction --no-progress --optimize-autoloader
       shell: bash
 
