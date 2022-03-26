@@ -5,6 +5,11 @@ inputs:
     description: 'Prod or development release (composer --dev)'
     required: true
     default: false
+  artifact:
+    description: 'Create and upload artifact'
+    required: true
+    default: false
+
 runs:
   using: "composite"
   steps:
@@ -28,10 +33,12 @@ runs:
       shell: bash
 
     - name: Compress release
+      if: ${{ inputs.artifact == 'true' }}
       run: tar cvfz release-${{ steps.sha.outputs.sha7 }}.tar.gz --exclude=web/.csslintrc --exclude=web/.eslintignore --exclude=web/.eslintrc.json --exclude=web/.example.gitignore --exclude=web/.gitignore --exclude=web/.ht.router.php --exclude=web/example.gitignore --exclude=web/INSTALL.txt --exclude=web/README.md --exclude=web/update.php --exclude=web/web.config --exclude=web/modules/README.txt --exclude=web/profiles/README.txt --exclude=web/themes/README.txt --exclude=web/sites/development.services.yml --exclude=web/sites/example.settings.local.php --exclude=web/sites/example.sites.php --exclude=web/sites/example.sites.php --exclude=web/sites/README.txt composer.json composer.lock vendor/ web/
       shell: bash
 
     - name: Upload artifact
+      if: ${{ inputs.artifact == 'true' }}
       uses: actions/upload-artifact@v3
       with:
         name: release-${{ steps.sha.outputs.sha7 }}.tar.gz
