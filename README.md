@@ -3,7 +3,7 @@
 
 This GitHub action creates a Drupal 8+ release artifact uploaded to be reused for subsequent workflow steps.
 
-Usage example:
+## Usage
 
 
 ```yml
@@ -20,13 +20,17 @@ jobs:
           artifact: false
 ```
 
-## Inputs:
+## Environment
+
+- `GITHUB_SHA` - It uses this environment variable to compute an artifact filename based on first 7 characters from SHA.
+
+## Inputs
 
 - `dev` - (Default: `false`) - When `true` it installs all composer dependencies (including development). This is useful when creating a release that to run tests.
 - `artifact` - (Default: `false`) - Since version `v1.1`. When `true` it creates an artifact which is uploaded to be reused in subsequent steps. Default filename is prefixed with `release-` and contains commit SHA 7 characters (e.g. `release-a0c2b31.tar.gz`).
 
 
-## Outputs:
+## Outputs
 
 Since `v1.2`:
 
