@@ -29,3 +29,4 @@ runs:
       uses: actions/upload-artifact@v3
       with:
         name: release-${{ steps.sha.outputs.sha7 }}.tar.gz
+        path: ./release-${{ steps.sha.outputs.sha7 }}.tar.gz
