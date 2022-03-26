@@ -46,7 +46,7 @@ jobs:
     outputs:
       filename: ${{ steps.release.outputs.filename }}
       base: ${{ steps.release.outputs.base }}
-      sha: ${{ steps.release.outputs.sha }}
+      sha7: ${{ steps.release.outputs.sha7 }}
     steps:
       - name: "Build artifact"
         id: release

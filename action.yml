@@ -16,7 +16,7 @@ outputs:
   base:
     description: "Artifact base name"
     value: release-${{ steps.sha.outputs.sha7 }}
-  sha:
+  sha7:
     description: "Artifact base name"
     value: ${{ steps.sha.outputs.sha7 }}
 
