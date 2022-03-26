@@ -24,6 +24,7 @@ runs:
 
     - name: "Validate composer schema"
       run: composer validate --no-ansi --strict
+      shell: bash
 
     - name: "Install prod dependencies"
       if: ${{ inputs.dev == 'false' }}
