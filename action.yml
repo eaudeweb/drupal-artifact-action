@@ -1,0 +1,29 @@
+name: "Build Drupal 8+ release"
+description: 'Checkout a Drupal composer-base repository and create an artifact release'
+inputs:
+  dev:
+    description: 'Prod or development release (composer --dev)'
+    required: true
+    default: false
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+
+    - name: "Compute SHA"
+      id: sha
+      run: echo "::set-output name=sha7::$(echo ${GITHUB_SHA} | cut -c1-7)"
+      shell: bash
+
+    - name: Install dependencies
+      run: composer install --no-ansi --no-dev --no-interaction --no-progress --optimize-autoloader
+
+    - name: Compress release
+      run: tar cvfz release-${{ steps.sha.outputs.sha7 }}.tar.gz --exclude=web/.csslintrc --exclude=web/.eslintignore --exclude=web/.eslintrc.json --exclude=web/.example.gitignore --exclude=web/.gitignore --exclude=web/.ht.router.php --exclude=web/example.gitignore --exclude=web/INSTALL.txt --exclude=web/README.md --exclude=web/update.php --exclude=web/web.config --exclude=web/modules/README.txt --exclude=web/profiles/README.txt --exclude=web/themes/README.txt --exclude=web/sites/development.services.yml --exclude=web/sites/example.settings.local.php --exclude=web/sites/example.sites.php --exclude=web/sites/example.sites.php --exclude=web/sites/README.txt composer.json composer.lock vendor/ web/
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: release-${{ steps.sha.outputs.sha7 }}.tar.gz
