@@ -9,6 +9,16 @@ inputs:
     description: 'Create and upload artifact'
     required: true
     default: false
+outputs:
+  filename:
+    description: "Artifact archive full filename"
+    value: release-${{ steps.sha.outputs.sha7 }}.tar.gz
+  base:
+    description: "Artifact base name"
+    value: release-${{ steps.sha.outputs.sha7 }}
+  sha7:
+    description: "Artifact base name"
+    value: ${{ steps.sha.outputs.sha7 }}
 
 runs:
   using: "composite"
