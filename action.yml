@@ -4,11 +4,12 @@ inputs:
   dev:
     description: 'Prod or development release (composer --dev)'
     required: true
-    default: false
+    default: 'false'
   artifact:
     description: 'Create and upload artifact'
     required: true
-    default: false
+    default: 'false'
+
 outputs:
   filename:
     description: "Artifact archive full filename"
