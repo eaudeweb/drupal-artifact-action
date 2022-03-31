@@ -1,5 +1,5 @@
-name: 'Build Drupal 8+ release'
-description: 'Checkout a Drupal composer-base repository and create an artifact release'
+name: 'Build Drupal 8+ artifact'
+description: 'Create an artifact release archive from a Drupal composer repository'
 
 outputs:
   filename:
