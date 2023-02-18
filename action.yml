@@ -17,7 +17,7 @@ runs:
   steps:
     - name: "Compute SHA"
       id: sha
-      run: echo "::set-output name=sha7::$(echo ${GITHUB_SHA} | cut -c1-7)"
+      run: echo "sha7=$(echo ${GITHUB_SHA} | cut -c1-7)" >> "$GITHUB_OUTPUT"
       shell: bash
 
     - name: 'Compress release'
